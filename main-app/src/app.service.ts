@@ -13,11 +13,10 @@ export class AppService {
 
   async getHelloFromMicroservice(): Promise<string> {
     try {
-      const microserviceHost = process.env.MICROSERVICE_HOST || 'localhost';
-      const microservicePort = process.env.MICROSERVICE_PORT || '3001';
-      const microserviceUrl = `http://${microserviceHost}:${microservicePort}`;
+      const microserviceUrl =
+        process.env.MICROSERVICE_URL || "http://localhost:3001"; // Updated to use MICROSERVICE_URL
       const response = await firstValueFrom(
-        this.httpService.get(`${microserviceUrl}/greeting`)
+        this.httpService.get(`${microserviceUrl}/greeting`),
       );
       return response.data;
     } catch (error) {
